@@ -391,49 +391,33 @@ lemma noEsistsk_Lemma(x: int)
 	}
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //RETO: Demostrar el siguiente lemma (por contradicción):
-//Si lo consigues, envíame un fichero .dfy con el lema probado y las definiciones y lemas auxiliares
-//estrictamente necesarias.
-/*lemma noExistsz_Lemma(x: int, y: int)
-	requires x%2 == 1 && y%2 == 1
-	ensures !exists z:int :: x*x + y*y == z*z
+lemma noExistsz_Lemma(x: int, y: int)
+	requires x % 2 == 1 && y % 2 == 1
+	ensures !exists z: int :: x*x + y*y == z*z
 {
-	if exists z:int :: x*x + y*y == z*z {
-		var k:int :| x*x + y*y == k*k;
-		assert k*k == x*x + y*y;
-		if x%2 == 0 && y%2 == 0 {
-			var a := x/2;
-			assert x == 2*a;
-			var b := y/2;
-			assert y == 2*b;
-			assert k*k == (2*a)*(2*a) + (2*b)*(2*b) == 4*a*a + 4*b*b == 2*(2*a*a + 2*b*b);
-			assert false;
-		}
-		else if x%2 == 0 && y%2 == 1 {
-			var a := x/2;
-			assert x == 2*a;
-			var b := (y-1)/2;
-			assert y == 2*b + 1;
-			assert k*k == (2*a)*(2*a) + (2*b+1)*(2*b+1) == 4*a*a + 4*b*b + 4*b + 1 == 2*(2*a*a + 2*b*b + 2*b) + 1;
-		}
-		else if x%2 == 1 && y%2 == 0 {
-			var a := (x-1)/2;
-			assert x == 2*a + 1;
-			var b := y/2;
-			assert y == 2*b;
-			assert k*k == (2*a+1)*(2*a+1) + (2*b)*(2*b) == 4*a*a + 4*a + 1 + 4*b*b == 2*(2*a*a + 2*a + 2*b*b) + 1;
-		}
-		else if x%2 == 1 && y%2 == 1{
-			var a := (x-1)/2;
-			assert x == 2*a + 1;
-			var b := (y-1)/2;
-			assert y == 2*b + 1;
-			assert k*k == (2*a+1)*(2*a+1) + (2*b+1)*(2*b+1) == 4*a*a + 4*a + 1 + 4*b*b + 4*b + 1 == 2*(2*a*a + 2*a + 2*b*b + 2*b + 1);
-		}
+	if exists z: int :: x*x + y*y == z*z {
+		var k: int :| x*x + y*y == k*k;
+		assert x % 2 == 1 && y % 2 == 1;
+		var a := (x-1)/2;
+		// assert x == 2*a + 1;
+		var b := (y-1)/2;
+		// assert y == 2*b + 1;
+		assert k*k == (2*a+1)*(2*a+1) + (2*b+1)*(2*b+1) == 
+			4*a*a + 4*a + 1 + 4*b*b + 4*b + 1 == 
+			2*(2*a*a + 2*a + 2*b*b + 2*b + 1);
+		assert k*k % 2 == 0;
+		Cuadr1_Lemma(k);
+		assert k % 2 == 0;
+		var c := k/2;
+		// assert k == 2*c;
+		assert (2*c)*(2*c) == 2*(2*a*a + 2*a + 2*b*b + 2*b + 1);
+		assert 2*(2*c*c) == 2*(2*a*a + 2*a + 2*b*b + 2*b + 1);
+		assert 2*c*c == 2*a*a + 2*a + 2*b*b + 2*b + 1;
+		assert 2*(c*c) == 2*(a*a + a + b*b + b) + 1;
+		assert false;
 	}
-}*/
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
 
 //Ejemplo: código como prueba, el código calcula los valores que la postcondición dice que existen.
 //Función auxiliar que permite generar triggers para r.
